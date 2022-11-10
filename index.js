@@ -18,7 +18,7 @@ async function run () {
         const serviceCollection = client.db('edu_expert').collection('services');        
         const reviewCollection = client.db('edu_expert').collection('reviews');        
 
-    // api for load all services data
+    // load all services data (read)
         app.get('/services', async (req, res) => {
             const query = {};
             const cursor =  serviceCollection.find(query);
@@ -26,7 +26,7 @@ async function run () {
             res.send(services);
         })
 
-    // api for load single service data
+    // load single service data (read)
         app.get('/service/:id', async (req, res) => {
             const id = req.params.id;            
             const query = {_id: ObjectId(id)};
@@ -35,7 +35,7 @@ async function run () {
             res.send(service);
         })
 
-    // api for post service data
+    // post service data (create)
         app.post('/service', async(req, res) => {
             const service =  req.body;
             const result = await serviceCollection.insertOne(service);            
@@ -43,9 +43,19 @@ async function run () {
             res.send(result);
         })
 
+    // load reviews via service_id (read)
         app.get('/reviews/:id', async (req, res) => {
             const id = req.params.id;                        
             const query = {service_id: id};            
+            const cursor =  reviewCollection.find(query);
+            const reviews = await cursor.toArray();
+            res.send(reviews);
+        })
+
+    // load reviews via email (read)
+        app.get('/my-reviews/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {email: id};            
             const cursor =  reviewCollection.find(query);
             const reviews = await cursor.toArray();
             res.send(reviews);
