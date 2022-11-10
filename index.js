@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 
 const port = process.env.PORT || 5000;
@@ -16,13 +16,39 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run () {
     try{
         const serviceCollection = client.db('edu_expert').collection('services');        
+        const reviewCollection = client.db('edu_expert').collection('reviews');        
 
+    // api for load all services data
         app.get('/services', async (req, res) => {
             const query = {};
             const cursor =  serviceCollection.find(query);
             const services = await cursor.toArray();
             res.send(services);
         })
+
+    // api for load single service data
+        app.get('/service/:id', async (req, res) => {
+            const id = req.params.id;            
+            const query = {_id: ObjectId(id)};
+            const cursor =  serviceCollection.find(query);
+            const service = await cursor.toArray();
+            res.send(service);
+        })
+
+    // api for post service data
+        app.post('/service', async(req, res) => {
+            const service =  req.body;
+            const result = await serviceCollection.insertOne(service);            
+            console.log(result);            
+            res.send(result);
+        })
+
+        
+
+
+        
+
+
     }
     finally{
 
@@ -36,42 +62,6 @@ app.get('/', (req, res) => {
     res.send('Hello from node mongo crud server');
 })
 
-
-
-app.get('/service/:id', (req, res) => {
-
-    res.send(comments);
-})
-
 app.listen(port, () => {
     console.log(`node-mongo-crud-server is running on port ${port}`);
 })
-
-
-const comments = [
-    {
-        email: 'sakib@gmail.com',
-        name: 'Nakib Uddin Ahmad',
-        photoURL: 'https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c',
-        body: 'A must for non-native learners and advanced learners. Step by step method of writing for many different school boards in South Asian countries. Extremely practical way with appropriate examples.'        
-    },
-    {
-        email: 'sakib@gmail.com',
-        name: 'Nakib Uddin Ahmad',
-        photoURL: 'https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c',
-        body: 'absolutely great! advanced my writing skills a lot, helped me understand the academic writing a lot better, with a solid perception about plagiarism and other important academic matters.'        
-    },
-    {
-        email: 'sakib@gmail.com',
-        name: 'Nakib Uddin Ahmad',
-        photoURL: 'https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c',
-        body: 'This is a very good course That said, it suffers from the same problem most courses Coursera provides. The Peer Review, where you may end up being reviewed by a classmate who is prejudiced against your opinion and grades you falsely.'        
-    },
-    {
-        email: 'sakib@gmail.com',
-        name: 'Nakib Uddin Ahmad',
-        photoURL: 'https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c',
-        body: 'Very bad. Not helpful at all. No one is responsible for the class. All the files are expired and I reported the problem. No one cares about it or fixes it.'        
-    }
-
-]
