@@ -45,6 +45,7 @@
 
 	{
 		"service_id": "636d4fef73e5dd1fb143b629",
+        "service_name": "Physics",
         "email": "nakibaust137@gmail.com",
         "name": "Nakib Uddin Ahmad",
         "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c",
@@ -52,6 +53,7 @@
     },
     {
 		"service_id": "636d4fef73e5dd1fb143b62a",
+        "service_name": "Chemistry",
         "email": "nakibaust137@gmail.com",
         "name": "Nakib Uddin Ahmad",
         "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c",
@@ -59,19 +61,20 @@
     },
     {
 		"service_id": "636d4fef73e5dd1fb143b629",
+        "service_name": "Physics",
         "email": "nakibaust137@gmail.com",
         "name": "Nakib Uddin Ahmad",
         "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c",
         "body": "This is a very good course That said, it suffers from the same problem most courses Coursera provides. The Peer Review, where you may end up being reviewed by a classmate who is prejudiced against your opinion and grades you falsely."        
     },
     {
-		"service_id": "636d4fef73e5dd1fb143b62a",
+		"service_id": "636d4fef73e5dd1fb143b62a",        
+        "service_name": "Chemistry",
         "email": "nakibaust137@gmail.com",
         "name": "Nakib Uddin Ahmad",
         "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu1X3lSoGbDpTlfh1x-1o7FmvxVjByvKGmdambh-VQ=s96-c",
         "body": "Very bad. Not helpful at all. No one is responsible for the class. All the files are expired and I reported the problem. No one cares about it or fixes it."        
     }
-
 
 
 
