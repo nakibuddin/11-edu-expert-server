@@ -38,8 +38,7 @@ async function run () {
     // post service data (create)
         app.post('/service', async(req, res) => {
             const service =  req.body;
-            const result = await serviceCollection.insertOne(service);            
-            console.log(result);            
+            const result = await serviceCollection.insertOne(service);                        
             res.send(result);
         })
 
@@ -63,8 +62,7 @@ async function run () {
 
     // delete reviews via review id (delete)
         app.delete('/reviews/:id', async(req, res) => {
-            const id = req.params.id;
-            console.log(id);
+            const id = req.params.id;            
             const query = {_id : ObjectId(id)};
             const result = await reviewCollection.deleteOne(query);
             res.send(result);
@@ -73,11 +71,17 @@ async function run () {
 
     // post review data (create)
         app.post('/review', async(req, res) => {
-            const review =  req.body;
-            console.log(review);
-            const result = await reviewCollection.insertOne(review);            
-            console.log(result);            
+            const review =  req.body;            
+            const result = await reviewCollection.insertOne(review);                            
             res.send(result);
+        })
+
+    // load limited services data (read)
+        app.get('/services/limit', async (req, res) => {
+            const query = {};
+            const cursor =  serviceCollection.find(query);
+            const services = await cursor.limit(3).toArray();
+            res.send(services);
         })
 
 
